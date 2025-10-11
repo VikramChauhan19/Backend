@@ -6,11 +6,7 @@ require("dotenv").config(); // ise jo bhi apne ne env me difine kiya hoga vo pro
 const dbConnect = () => {
   //fuction create kiya jo establish kerta he connection between your app and databse
   mongoose
-    .connect(process.env.DATABASE_URL, {
-      //database se connect ker liya
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    })
+    .connect(process.env.DATABASE_URL)
     .then(() => {
       console.log("Db connected successfuly");
     })

@@ -8,7 +8,7 @@ const todoSchema = mongoose.Schema({
     required: true,
     maxLength: 50,
   },
-  describtion: {
+  description: {
     type: String,
     required: true,
     maxLength: 50,
@@ -25,4 +25,4 @@ const todoSchema = mongoose.Schema({
   },
 });
 
-module.export = mongoose.model("Todo", todoSchema); //model create hoga Todos nam se on todoSchema structure
+module.exports = mongoose.model("Todo", todoSchema); //model create hoga Todos nam se on todoSchema structure
