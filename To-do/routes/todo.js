@@ -5,11 +5,12 @@ const router = express.Router();
 //It helps organize your code and keep your index.js clean.
 
 //import controller
-const {createTodo} = require("../controllers/createTodo");
-const {getTodo} = require("../controllers/getTodos");
+const { createTodo } = require("../controllers/createTodo");
+const { getTodos, getTodoById } = require("../controllers/getTodos");
 
 //define api routes
 router.post("/createTodo", createTodo);
-router.get("/getTodo",getTodos);
+router.get("/getTodos", getTodos);
+router.get("/getTodos/:id", getTodoById);
 
 module.exports = router;
