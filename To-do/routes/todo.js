@@ -6,8 +6,10 @@ const router = express.Router();
 
 //import controller
 const {createTodo} = require("../controllers/createTodo");
+const {getTodo} = require("../controllers/getTodos");
 
 //define api routes
 router.post("/createTodo", createTodo);
+router.get("/getTodo",getTodos);
 
 module.exports = router;
