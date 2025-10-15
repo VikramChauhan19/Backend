@@ -13,7 +13,7 @@ const postSchema = mongoose.Schema({
             ref: "like"
         }
     ],
-    "comment":[
+    "comments":[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"comment"
