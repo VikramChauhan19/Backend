@@ -18,17 +18,41 @@ app.get("/", (req, res) => {
 });
 
 //profile
-app.get("/profile", isLoggedIn,async (req, res) => { //isLoggedIn is a middleware
-  let user = await userModel.findOne({email:req.user.email})
-  console.log(req.user);
-  res.render("profile",{user});
+app.get("/profile", isLoggedIn, async (req, res) => {
+  //isLoggedIn is a middleware
+  let user = await userModel
+    .findOne({ email: req.user.email })
+    .populate("posts");
+
+  res.render("profile", { user });
+});
+
+
+//like
+app.get("/like/:id", isLoggedIn, async (req, res) => {
+  //isLoggedIn is a middleware
+  let post = await userModel
+    .findOne({ id: req.params._id })
+    .populate("user");
+  post.likes.push(req.user.userid);
+  await post.save();
+
+  res.redirect("/profile", { user });
 });
 
 //post
-app.post("/post", isLoggedIn,async (req, res) => { //isLoggedIn is a middleware
-  let user = await userModel.findOne({email:req.user.email})
-  console.log(req.user);
-  res.render("profile",{user});
+app.post("/post", isLoggedIn, async (req, res) => {
+  //isLoggedIn is a middleware
+  let user = await userModel.findOne({ email: req.user.email });
+  let post = await postModel.create({
+    //created post
+    user: user._id,
+    content: req.body.content,
+  });
+  user.posts.push(post._id);
+  await user.save();
+
+  res.redirect("/profile");
 });
 
 //login route
@@ -82,7 +106,8 @@ app.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-function isLoggedIn(req, res, next) {  //midleware
+function isLoggedIn(req, res, next) {
+  //midleware
   if (req.cookies.token === "") return res.redirect("/login");
   else {
     let data = jwt.verify(req.cookies.token, "shhhh"); // decoded string return kerta he
