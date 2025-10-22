@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="w-full min-h-screen bg-zinc-900 p-10 text-white">
+      <div class="w-full flex justify-end">
+        <a
+          class="bg-red-500 rounded-md px-3 py-2 text-sm mb-5 inline-block"
+          href="/logout"
+          >Logout</a
+        >
+      </div>
+
+      <h3 class="text-3xl tracking-tighter">
+        <span class="font-light">Hello</span>, <%= user.name %> 👌
+      </h3>
+
+      <h5 class="mb-5">You can create a new post.</h5>
+      <form action="/post" method="post">  <!--form for post creation-->
+        <textarea
+          placeholder="What's on your mind"
+          class="p-3 outline-none w-1/3 bg-transparent border-2 border-zinc-800 rounded-md"
+          name=""
+        ></textarea>
+        <input
+          class="px-3 py-2 bg-blue-500 block rounded-md mt-2 w-40"
+          value="create new post"
+          type="submit"
+        />
+      </form>
+
+      <div class="posts mt-20">
+        <h3 class="text-zinc-400">Your Posts. </h3>
+        <div class="postcontainer mt-5">
+            <div class="post p-4 w-1/3  rounded-md bg-zinc-800 border-zinc-800 mb-5">
+                <h4 class="text-blue-800 mb-2">@username</h4>
+                <p class="text-sm tracking-tight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi sapiente dolor sed amet repellat! Praesentium enim, odit quis et eum dolores. Animi modi necessitatibus quasi deleniti nostrum molestias natus quo?</p>
+                <div class="btns flex gap-4 mt-5">
+                    <a class="text-blue-500">Like</a>
+                    <a class="text-zinc-600">edit</a>
+
+                </div>
+            </div>
+            <div class="post p-4 w-1/3  rounded-md bg-zinc-800 border-zinc-800 mb-5">
+                <h4 class="text-blue-800 mb-2">@username</h4>
+                <p class="text-sm tracking-tight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi sapiente dolor sed amet repellat! Praesentium enim, odit quis et eum dolores. Animi modi necessitatibus quasi deleniti nostrum molestias natus quo?</p>
+                <div class="btns flex gap-4 mt-5">
+                    <a class="text-blue-500">Like</a>
+                    <a class="text-zinc-600">edit</a>
+
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

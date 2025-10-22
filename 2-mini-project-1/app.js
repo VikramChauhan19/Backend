@@ -18,9 +18,17 @@ app.get("/", (req, res) => {
 });
 
 //profile
-app.get("/profile", isLoggedIn, (req, res) => {
+app.get("/profile", isLoggedIn,async (req, res) => { //isLoggedIn is a middleware
+  let user = await userModel.findOne({email:req.user.email})
   console.log(req.user);
-  res.render("login");
+  res.render("profile",{user});
+});
+
+//post
+app.post("/post", isLoggedIn,async (req, res) => { //isLoggedIn is a middleware
+  let user = await userModel.findOne({email:req.user.email})
+  console.log(req.user);
+  res.render("profile",{user});
 });
 
 //login route
@@ -63,7 +71,7 @@ app.post("/login", async (req, res) => {
         "shhhh"
       );
       res.cookie("token", token);
-      res.status(200).send("you can login");
+      res.status(200).redirect("/profile");
     } else res.redirect("/login");
   });
 });
@@ -75,9 +83,9 @@ app.get("/logout", (req, res) => {
 });
 
 function isLoggedIn(req, res, next) {  //midleware
-  if (req.cookies.token === "") res.send("you must be logged in");
+  if (req.cookies.token === "") return res.redirect("/login");
   else {
-    let data = jwt.verify(req.cookies.token, "shhhh");
+    let data = jwt.verify(req.cookies.token, "shhhh"); // decoded string return kerta he
     req.user = data;
   }
   next();
