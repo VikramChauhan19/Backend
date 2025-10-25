@@ -90,7 +90,7 @@ exports.login = async (req, res) => {
 
     const options = {
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
-      httpOnly: true,
+      httpOnly: true, //JavaScript on the browser can’t access it, making it safer against attacks like XSS.
     };
 
     // Convert to plain object and remove password
@@ -99,7 +99,7 @@ exports.login = async (req, res) => {
     userData.token = token;
 
     return res.status(200).cookie("token", token, options).json({
-      success: true,
+      success: true, 
       token,
       user: userData,
       message: "User logged in successfully",
@@ -111,4 +111,9 @@ exports.login = async (req, res) => {
       message: "User cannot be logged in, please try again later",
     });
   }
-};
+};  
+
+//auth,isStudent,isAdmin
+exports.auth = async (req,res)=>{  //middleware
+
+}
