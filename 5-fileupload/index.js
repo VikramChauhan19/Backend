@@ -17,7 +17,11 @@ app.use(express.json());
 // Attach express-fileupload middleware to handle file uploads (req.files)
 // You can pass options to fileupload() here if needed (limits, tempFileDir, etc.)
 const fileupload = require("express-fileupload");
-app.use(fileupload());
+app.use(fileupload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
+
 
 // -------------------------
 // Configuration / Initialization
